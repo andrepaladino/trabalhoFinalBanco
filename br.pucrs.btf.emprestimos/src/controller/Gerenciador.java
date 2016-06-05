@@ -70,5 +70,15 @@ public class Gerenciador {
 		emprestimos = banco.getEmprestimos();
 		return false;
 	}
+	
+	public List<Funcionario> getFuncionarios(){
+		carregaDados();
+		return funcionarios;
+	}
+	
+	public List<Equipamento> getEquipamentos(){
+		carregaDados();
+		return equipamentos;
+	}
 
 }

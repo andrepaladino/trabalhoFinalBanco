@@ -5,9 +5,15 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+
+import controller.Gerenciador;
+import model.Funcionario;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -16,11 +22,16 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.UIManager;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
+import javax.swing.JList;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class PaginaPrincipal extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
+	private Gerenciador gerenciador;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -43,6 +54,7 @@ public class PaginaPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public PaginaPrincipal() {
+		gerenciador = new Gerenciador();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 759, 464);
 		contentPane = new JPanel();
@@ -72,29 +84,47 @@ public class PaginaPrincipal extends JFrame {
 		JPanel panel_1 = new JPanel();
 		tabbedPane.addTab("Funcionários", null, panel_1, null);
 		
-		JButton btnCadastro = new JButton("cadastro");
+		JButton btnCadastro = new JButton("Cadastrar");
 		
 		textField = new JTextField();
 		textField.setColumns(10);
+		
+		JButton btnBuscar = new JButton("Buscar");
+		
+		JScrollPane scrollPane = new JScrollPane();
+		
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_1.createSequentialGroup()
+			gl_panel_1.createParallelGroup(Alignment.TRAILING)
+				.addGroup(Alignment.LEADING, gl_panel_1.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(208)
-					.addComponent(btnCadastro)
-					.addContainerGap(339, Short.MAX_VALUE))
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(btnBuscar)
+							.addPreferredGap(ComponentPlacement.RELATED, 290, Short.MAX_VALUE)
+							.addComponent(btnCadastro)))
+					.addContainerGap())
 		);
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnCadastro)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(319, Short.MAX_VALUE))
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+							.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(btnBuscar))
+						.addComponent(btnCadastro))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 316, GroupLayout.PREFERRED_SIZE)
+					.addGap(38))
 		);
+		
+		table = new JTable();
+		table.setToolTipText("");
+		scrollPane.setViewportView(table);
 		panel_1.setLayout(gl_panel_1);
 		
 		JPanel panel_2 = new JPanel();
