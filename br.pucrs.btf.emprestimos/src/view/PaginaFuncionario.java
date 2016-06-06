@@ -381,7 +381,7 @@ public class PaginaFuncionario extends JFrame {
 		String endereco = textFieldEndereco.getText() + ", " +  textField.getText() + " " + textFieldCidade.getText() + " - " + textFieldUF.getText().toUpperCase();
 		
 		if(podeGuardar){
-			if(gerenciador.addFuncionário(nome, senha, sexo, endereco, matricula, salario, dataAdmissao, nascimento)){
+			if(gerenciador.addFuncionario(nome, senha, sexo, endereco, matricula, salario, dataAdmissao, nascimento)){
 				JOptionPane.showMessageDialog(null, "Funcionário cadastrado com sucesso!");
 				limpaTela();
 			}else{

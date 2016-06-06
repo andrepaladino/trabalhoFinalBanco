@@ -87,7 +87,7 @@ public class Banco {
 	}
 
 	public List<Funcionario> getFuncionarios() {
-		List<Funcionario> funcionários = new ArrayList<Funcionario>();
+		List<Funcionario> funcionarios = new ArrayList<Funcionario>();
 
 		try {
 			Connection conexao = DriverManager.getConnection(srtConexao, connectionPorps);
@@ -111,7 +111,7 @@ public class Banco {
 				double salario = result.getDouble("salario");
 
 				Funcionario f = new Funcionario(nome, senha, sexo, endereco, matricula, salario, admissao, nascimento);
-				funcionários.add(f);
+				funcionarios.add(f);
 			}
 
 			result.close();
@@ -121,7 +121,7 @@ public class Banco {
 		} catch (SQLException e) {
 			return null;
 		}
-		return funcionários;
+		return funcionarios;
 	}
 
 	public List<Equipamento> getEquipamentos() {

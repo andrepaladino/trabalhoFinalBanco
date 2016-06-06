@@ -22,7 +22,7 @@ public class Gerenciador {
 		equipamentos = new ArrayList<Equipamento>();
 	}
 	
-	public boolean addFuncionário(String nome, String senha, String sexo, String endereco, 
+	public boolean addFuncionario(String nome, String senha, String sexo, String endereco, 
 			String matricula, double salario, Date dataAdmissao, Date nascimento){
 		
 		Funcionario f = new Funcionario(nome, senha, sexo, endereco, matricula, 

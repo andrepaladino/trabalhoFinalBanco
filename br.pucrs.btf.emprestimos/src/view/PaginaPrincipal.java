@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 
 import controller.Gerenciador;
 import model.Funcionario;
+import model.TabelaFuncionarios;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -90,6 +91,11 @@ public class PaginaPrincipal extends JFrame {
 		textField.setColumns(10);
 		
 		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				do_btnBuscar_actionPerformed(arg0);
+			}
+		});
 		
 		JScrollPane scrollPane = new JScrollPane();
 		
@@ -123,8 +129,17 @@ public class PaginaPrincipal extends JFrame {
 		);
 		
 		table = new JTable();
-		table.setToolTipText("");
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column"
+			}
+		));
+		
 		scrollPane.setViewportView(table);
+		
+		
 		panel_1.setLayout(gl_panel_1);
 		
 		JPanel panel_2 = new JPanel();
@@ -167,5 +182,10 @@ public class PaginaPrincipal extends JFrame {
 		PaginaEquipamento p = new PaginaEquipamento();
 		p.setVisible(true);
 		p.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+	}
+	protected void do_btnBuscar_actionPerformed(ActionEvent arg0) {
+		for (Funcionario f : gerenciador.getFuncionarios()) {
+			
+		}
 	}
 }
