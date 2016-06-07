@@ -72,6 +72,7 @@ public class Gerenciador {
 	}
 	
 	public List<Funcionario> getFuncionarios(){
+		System.out.println("oi");
 		carregaDados();
 		return funcionarios;
 	}

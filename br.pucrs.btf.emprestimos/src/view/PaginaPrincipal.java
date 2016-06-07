@@ -10,7 +10,6 @@ import javax.swing.border.EmptyBorder;
 
 import controller.Gerenciador;
 import model.Funcionario;
-import model.TabelaFuncionarios;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -33,6 +32,7 @@ public class PaginaPrincipal extends JFrame {
 	private JTextField textField;
 	private Gerenciador gerenciador;
 	private JTable table;
+	private DefaultTableModel modelTable;
 
 	/**
 	 * Launch the application.
@@ -129,15 +129,25 @@ public class PaginaPrincipal extends JFrame {
 		);
 		
 		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column"
-			}
-		));
 		
-		scrollPane.setViewportView(table);
+		List<Funcionario> funcionarios = gerenciador.getFuncionarios();
+		
+//		String[] colunas = new String[] {"Nome", "Matricula", "Sexo", "Admissao", "Nascimento", "Endereco", "Salario"};
+//		modelTable = new DefaultTableModel(colunas, funcionarios.size());
+//		
+//		for (Funcionario f : funcionarios) {
+//			Object[] obj = {f.getNome(), f.getMatricula(), f.getSexo(), f.getDataAdmissao(),
+//					f.getNascimento(), f.getEndereco(), f.getSalario()};
+//			
+//			modelTable.addRow(obj);
+//		}
+//		
+//		table.setModel(modelTable);
+		
+		
+		
+		scrollPane.add(table);
+		
 		
 		
 		panel_1.setLayout(gl_panel_1);
@@ -185,7 +195,6 @@ public class PaginaPrincipal extends JFrame {
 	}
 	protected void do_btnBuscar_actionPerformed(ActionEvent arg0) {
 		for (Funcionario f : gerenciador.getFuncionarios()) {
-			
 		}
 	}
 }

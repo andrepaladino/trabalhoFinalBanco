@@ -24,7 +24,7 @@ public class Banco {
 	public boolean guardaFuncionario(Funcionario f) {
 
 		try {
-			Connection conexao = DriverManager.getConnection(srtConexao, connectionPorps);
+			Connection conexao = DriverManager.getConnection(srtConexao, "bf109309","bf109309");
 
 			String sql = "INSERT INTO TRABFUNCIONARIOS"
 					+ "(matricula, nome, senha, sexo, admissao, nascimento, endereco, salario)"
@@ -88,13 +88,15 @@ public class Banco {
 
 	public List<Funcionario> getFuncionarios() {
 		List<Funcionario> funcionarios = new ArrayList<Funcionario>();
+		System.out.println("oioi");
 
 		try {
-			Connection conexao = DriverManager.getConnection(srtConexao, connectionPorps);
+			Connection conexao = DriverManager.getConnection(srtConexao, "bf109309", "bf109309");
 
 			String sql = "SELECT matricula, nome, senha, sexo, admissao, nascimento, endereco, salario"
 					+ "FROM trabfuncionarios"
 					+ "ORDER BY nome";
+			System.out.println("Conectou");
 
 			PreparedStatement stmt = conexao.prepareStatement(sql);
 
