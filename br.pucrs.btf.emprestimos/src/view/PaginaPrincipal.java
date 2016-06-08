@@ -32,7 +32,7 @@ public class PaginaPrincipal extends JFrame {
 	private JTextField textField;
 	private Gerenciador gerenciador;
 	private JTable table;
-	private DefaultTableModel modelTable;
+	private DefaultTableModel model;
 
 	/**
 	 * Launch the application.
@@ -82,6 +82,8 @@ public class PaginaPrincipal extends JFrame {
 					.addContainerGap())
 		);
 		
+		
+		
 		JPanel panel_1 = new JPanel();
 		tabbedPane.addTab("Funcionários", null, panel_1, null);
 		
@@ -101,17 +103,17 @@ public class PaginaPrincipal extends JFrame {
 		
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
-			gl_panel_1.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, gl_panel_1.createSequentialGroup()
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_1.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
-						.addGroup(gl_panel_1.createSequentialGroup()
+						.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
 							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(btnBuscar)
 							.addPreferredGap(ComponentPlacement.RELATED, 290, Short.MAX_VALUE)
-							.addComponent(btnCadastro)))
+							.addComponent(btnCadastro))
+						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		gl_panel_1.setVerticalGroup(
@@ -123,30 +125,24 @@ public class PaginaPrincipal extends JFrame {
 							.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addComponent(btnBuscar))
 						.addComponent(btnCadastro))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 316, GroupLayout.PREFERRED_SIZE)
-					.addGap(38))
+					.addGap(18)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 290, GroupLayout.PREFERRED_SIZE)
+					.addGap(52))
 		);
 		
 		table = new JTable();
 		
-		List<Funcionario> funcionarios = gerenciador.getFuncionarios();
+		Object[] colunas = {"Nome", "Matricula", "Sexo", "Admissao", "Nascimento", "Endereco", "Salario"};
+		model = new DefaultTableModel(colunas, 0);
+		table.setModel(model);
+		scrollPane.setViewportView(table);
 		
-//		String[] colunas = new String[] {"Nome", "Matricula", "Sexo", "Admissao", "Nascimento", "Endereco", "Salario"};
-//		modelTable = new DefaultTableModel(colunas, funcionarios.size());
-//		
-//		for (Funcionario f : funcionarios) {
-//			Object[] obj = {f.getNome(), f.getMatricula(), f.getSexo(), f.getDataAdmissao(),
-//					f.getNascimento(), f.getEndereco(), f.getSalario()};
-//			
-//			modelTable.addRow(obj);
-//		}
-//		
-//		table.setModel(modelTable);
-		
-		
-		
-		scrollPane.add(table);
+		for (Funcionario f : gerenciador.getFuncionarios()) {
+			Object[] linha = {f.getNome(), f.getMatricula(), f.getSexo(), 
+					f.getDataAdmissao(), f.getNascimento(), f.getEndereco(), f.getSalario()};
+			
+			model.addRow(linha);
+		}
 		
 		
 		
