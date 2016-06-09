@@ -59,7 +59,6 @@ public class PaginaFuncionario extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textFieldNome;
-	private JTextField textFieldMatricula;
 	private JPasswordField passwordField;
 	private JTextField textFieldEndereco;
 	private JTextField textFieldUF;
@@ -70,8 +69,9 @@ public class PaginaFuncionario extends JFrame {
 	private JRadioButton rdbtnFeminino;
 	private Gerenciador gerenciador;
 	private JFormattedTextField formattedTextFieldSalario;
-	private JTextField textField;
+	private JFormattedTextField textField;
 	private DateTimeFormatter formatDatas;
+	private JFormattedTextField textFieldMatricula;
 
 	/**
 	 * Launch the application.
@@ -127,9 +127,6 @@ public class PaginaFuncionario extends JFrame {
 		textFieldNome.setColumns(10);
 
 		JLabel lblMatricula = new JLabel("Matricula:");
-
-		textFieldMatricula = new JTextField();
-		textFieldMatricula.setColumns(10);
 
 		rdbtnMasculino = new JRadioButton("Masculino");
 
@@ -193,56 +190,26 @@ public class PaginaFuncionario extends JFrame {
 
 		formattedTextFieldSalario = new JFormattedTextField();
 		formattedTextFieldSalario.setFormatterFactory(new DefaultFormatterFactory(formatador));
+		formattedTextFieldSalario.setText("0");
 
 		JLabel lblNmero = new JLabel("N\u00FAmero:");
 
 		JLabel lblNmero_1 = new JLabel("N\u00FAmero:");
 
-		textField = new JTextField();
-		textField.setColumns(10);
+		
+		
+		try {
+			MaskFormatter numeros = new MaskFormatter("#########");
+			textFieldMatricula = new JFormattedTextField(numeros);
+			textField = new JFormattedTextField(numeros);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
 
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-							.addComponent(lblCadastroFuncionrio)
-							.addComponent(lblNome)
-							.addComponent(textFieldNome, GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
-							.addComponent(lblMatricula)
-							.addComponent(textFieldMatricula, 301, 301, 301))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(rdbtnMasculino)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(rdbtnFeminino))
-						.addComponent(lblSenha)
-						.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 189, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addComponent(textFieldEndereco, GroupLayout.PREFERRED_SIZE, 192, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblEndereo))
-							.addGap(70)
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblUF)
-								.addGroup(gl_panel.createSequentialGroup()
-									.addGap(5)
-									.addComponent(textFieldUF, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE))))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblDataDeNascimento)
-								.addComponent(formattedTextFieldNasc, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE))
-							.addGap(44)
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblDataDeAdmisso)
-								.addComponent(formattedTextFieldAdm, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(textFieldCidade, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblNmero_1)
-								.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
-					.addGap(469))
 				.addGroup(gl_panel.createSequentialGroup()
 					.addComponent(lblCidade)
 					.addPreferredGap(ComponentPlacement.RELATED, 621, Short.MAX_VALUE)
@@ -257,6 +224,45 @@ public class PaginaFuncionario extends JFrame {
 				.addGroup(gl_panel.createSequentialGroup()
 					.addComponent(formattedTextFieldSalario, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
+				.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+						.addComponent(textFieldMatricula, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
+						.addGroup(Alignment.LEADING, gl_panel.createParallelGroup(Alignment.LEADING)
+							.addComponent(lblCadastroFuncionrio)
+							.addComponent(lblNome)
+							.addComponent(textFieldNome, GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
+							.addComponent(lblMatricula))
+						.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
+							.addComponent(rdbtnMasculino)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(rdbtnFeminino))
+						.addComponent(lblSenha, Alignment.LEADING)
+						.addComponent(passwordField, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 189, GroupLayout.PREFERRED_SIZE)
+						.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(textFieldEndereco, GroupLayout.PREFERRED_SIZE, 192, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblEndereo))
+							.addGap(70)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblUF)
+								.addGroup(gl_panel.createSequentialGroup()
+									.addGap(5)
+									.addComponent(textFieldUF, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE))))
+						.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblDataDeNascimento)
+								.addComponent(formattedTextFieldNasc, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE))
+							.addGap(44)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblDataDeAdmisso)
+								.addComponent(formattedTextFieldAdm, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)))
+						.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
+							.addComponent(textFieldCidade, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblNmero_1)
+								.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+					.addGap(469))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -270,7 +276,7 @@ public class PaginaFuncionario extends JFrame {
 					.addComponent(lblMatricula)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(textFieldMatricula, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGap(7)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(rdbtnMasculino)
 						.addComponent(rdbtnFeminino))
@@ -307,7 +313,7 @@ public class PaginaFuncionario extends JFrame {
 					.addComponent(lblSalario)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(formattedTextFieldSalario, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
 					.addComponent(btnCadastrar))
 		);
 		panel.setLayout(gl_panel);
@@ -329,12 +335,7 @@ public class PaginaFuncionario extends JFrame {
 			podeGuardar = false;
 		}
 		
-		if(textFieldMatricula.getText().length() < 9){
-			JOptionPane.showMessageDialog(textFieldMatricula, "Insira uma matrícula válida");
-			podeGuardar = false;
-		}
-		if(textFieldEndereco.getText().length() <= 1 || textFieldCidade.getText().length() <= 1 || textFieldUF.getText().length() < 2
-				|| textFieldUF.getText().length() > 2){
+		if(textFieldEndereco.getText().length() <= 1 || textFieldCidade.getText().length() <= 1 || textFieldUF.getText().length() != 2){
 			JOptionPane.showMessageDialog(null, "Insira dados corretos nos campos de endereço");
 			podeGuardar = false;
 		}
@@ -385,9 +386,12 @@ public class PaginaFuncionario extends JFrame {
 				JOptionPane.showMessageDialog(null, "Funcionário cadastrado com sucesso!");
 				limpaTela();
 			}else{
-				JOptionPane.showConfirmDialog(null, "Verifique os campos e tente o cadastro novamente");
+				JOptionPane.showMessageDialog(null, "Falha ao guardar funcinario no banco!");
 				limpaTela();
 			}
+		}else{
+			JOptionPane.showMessageDialog(null, "Verifique os campos e tente novamente");
+			limpaTela();
 		}
 	}
 	
@@ -402,6 +406,6 @@ public class PaginaFuncionario extends JFrame {
 		textFieldUF.setText("");
 		textFieldCidade.setText("");
 		textField.setText("");
-		formattedTextFieldSalario.setText("");
+		formattedTextFieldSalario.setText("0");
 	}
 }
