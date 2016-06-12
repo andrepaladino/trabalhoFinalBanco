@@ -2,6 +2,7 @@ package controller;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 
@@ -86,7 +87,48 @@ public class Banco {
 
 	}
 
-	public List<Funcionario> getFuncionarios() {
+//	public List<Funcionario> getFuncionarios() {
+//		List<Funcionario> funcionarios = new ArrayList<Funcionario>();
+//		System.out.println("oioi");
+//
+//		try {
+//			Connection conexao = DriverManager.getConnection(srtConexao, "bf109309", "bf109309");
+//
+//			String sql = "SELECT matricula, nome, senha, sexo, admissao, nascimento, endereco, salario"
+//					+ " FROM trabfuncionarios"
+//					+ " ORDER BY nome";
+//			System.out.println("Conectou");
+//
+//			PreparedStatement stmt = conexao.prepareStatement(sql);
+//
+//			ResultSet result = stmt.executeQuery();
+//
+//			while (result.next()) {
+//				String matricula = result.getString("matricula");
+//				String nome = result.getString("nome");
+//				String senha = result.getString("senha");
+//				String sexo = result.getString("sexo");
+//				Date admissao = result.getDate("admissao");
+//				Date nascimento = result.getDate("nascimento");
+//				String endereco = result.getString("endereco");
+//				double salario = result.getDouble("salario");
+//
+//				Funcionario f = new Funcionario(nome, senha, sexo, endereco, matricula, salario, admissao, nascimento);
+//				funcionarios.add(f);
+//			}
+//
+//			result.close();
+//			stmt.close();
+//			conexao.close();
+//
+//		} catch (SQLException e) {
+//			System.out.println(e);
+//			return Collections.emptyList();
+//		}
+//		return funcionarios;
+//	}
+	
+	public List<Funcionario> getFuncionarios(String nomeFunc) {
 		List<Funcionario> funcionarios = new ArrayList<Funcionario>();
 		System.out.println("oioi");
 
@@ -94,11 +136,13 @@ public class Banco {
 			Connection conexao = DriverManager.getConnection(srtConexao, "bf109309", "bf109309");
 
 			String sql = "SELECT matricula, nome, senha, sexo, admissao, nascimento, endereco, salario"
-					+ "FROM trabfuncionarios"
-					+ "ORDER BY nome";
+					+ " FROM trabfuncionarios"
+					+ " WHERE nome like ?"
+					+ " ORDER BY nome";
 			System.out.println("Conectou");
 
 			PreparedStatement stmt = conexao.prepareStatement(sql);
+			stmt.setString(1, nomeFunc);
 
 			ResultSet result = stmt.executeQuery();
 
@@ -121,21 +165,24 @@ public class Banco {
 			conexao.close();
 
 		} catch (SQLException e) {
-			return null;
+			System.out.println(e);
+			return Collections.emptyList();
 		}
 		return funcionarios;
 	}
 
-	public List<Equipamento> getEquipamentos() {
+	public List<Equipamento> getEquipamentos(String descricaoEqui) {
 		List<Equipamento> equipamentos = new ArrayList<Equipamento>();
 
 		try {
 			Connection conexao = DriverManager.getConnection(srtConexao, connectionPorps);
 
 			String sql = "SELECT identificacao, aquisicao, descricao, custo_diario, em_manutencao, tipo"
-					+ "FROM trabequipamentos";
+					+ " FROM trabequipamentos "
+					+ " WHERE descricao like ?";
 
 			PreparedStatement stmt = conexao.prepareStatement(sql);
+			stmt.setString(1, descricaoEqui);
 
 			ResultSet result = stmt.executeQuery();
 

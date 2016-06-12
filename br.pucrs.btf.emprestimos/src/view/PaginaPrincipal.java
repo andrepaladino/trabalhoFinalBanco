@@ -23,6 +23,7 @@ import javax.swing.UIManager;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -137,7 +138,7 @@ public class PaginaPrincipal extends JFrame {
 		table.setModel(model);
 		scrollPane.setViewportView(table);
 		
-		for (Funcionario f : gerenciador.getFuncionarios()) {
+		for (Funcionario f : gerenciador.getFuncionarios("")) {
 			Object[] linha = {f.getNome(), f.getMatricula(), f.getSexo(), 
 					f.getDataAdmissao(), f.getNascimento(), f.getEndereco(), f.getSalario()};
 			
@@ -190,7 +191,20 @@ public class PaginaPrincipal extends JFrame {
 		p.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
 	protected void do_btnBuscar_actionPerformed(ActionEvent arg0) {
-		for (Funcionario f : gerenciador.getFuncionarios()) {
+		Object[] colunas = {"Nome", "Matricula", "Sexo", "Admissao", "Nascimento", "Endereco", "Salario"};
+		model = new DefaultTableModel(colunas, 0);
+		table.setModel(model);
+		
+		
+		List<Funcionario> funcs = gerenciador.getFuncionarios(textField.getText());
+		if(funcs.isEmpty()){
+			JOptionPane.showMessageDialog(null, "Nenhum usuário encontrado.");
+		}else
+		for (Funcionario f : funcs) {
+			Object[] linha = {f.getNome(), f.getMatricula(), f.getSexo(), 
+					f.getDataAdmissao(), f.getNascimento(), f.getEndereco(), f.getSalario()};
+			
+			model.addRow(linha);
 		}
 	}
 }
