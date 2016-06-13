@@ -210,45 +210,6 @@ public class Banco {
 
 		return equipamentos;
 	}
-	
-	public List<Equipamento> getEquipamentosLivres(){
-		List<Equipamento> equipamentos = new ArrayList<Equipamento>();
-
-		try {
-			Connection conexao = DriverManager.getConnection(srtConexao, connectionPorps);
-
-			String sql = "SELECT identificacao, aquisicao, descricao, custo_diario, em_manutencao, tipo"
-					+ " FROM trabequipamentos "
-					+ " WHERE em_manutencao = 'N'";
-
-			PreparedStatement stmt = conexao.prepareStatement(sql);
-
-			ResultSet result = stmt.executeQuery();
-
-			while (result.next()) {
-				int identificacao = result.getInt("identificacao");
-				Date aquisicao = result.getDate("aquisicao");
-				String descricao = result.getString("descricao");
-				double custoDiario = result.getDouble("custo_diario");
-				String emManutencao = result.getString("em_manutencao");
-				String tipo = result.getString("tipo");
-
-				Equipamento equi = new Equipamento(identificacao, aquisicao, descricao, custoDiario, emManutencao,
-						tipo);
-
-				equipamentos.add(equi);
-			}
-
-			result.close();
-			stmt.close();
-			conexao.close();
-
-		} catch (SQLException e) {
-			return null;
-		}
-
-		return equipamentos;
-	}
 
 	public List<Emprestimo> getEmprestimos() {
 		// TODO Auto-generated method stub
