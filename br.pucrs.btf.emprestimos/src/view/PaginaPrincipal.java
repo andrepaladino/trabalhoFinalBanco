@@ -34,6 +34,9 @@ public class PaginaPrincipal extends JFrame {
 	private Gerenciador gerenciador;
 	private JTable table;
 	private DefaultTableModel model;
+	private JTextField textField_1;
+	private JTable table_1;
+	private DefaultTableModel model2;
 
 	/**
 	 * Launch the application.
@@ -108,13 +111,13 @@ public class PaginaPrincipal extends JFrame {
 				.addGroup(gl_panel_1.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-						.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
+						.addComponent(scrollPane, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
+						.addGroup(gl_panel_1.createSequentialGroup()
 							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(btnBuscar)
 							.addPreferredGap(ComponentPlacement.RELATED, 290, Short.MAX_VALUE)
-							.addComponent(btnCadastro))
-						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE))
+							.addComponent(btnCadastro)))
 					.addContainerGap())
 		);
 		gl_panel_1.setVerticalGroup(
@@ -126,8 +129,8 @@ public class PaginaPrincipal extends JFrame {
 							.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addComponent(btnBuscar))
 						.addComponent(btnCadastro))
-					.addGap(18)
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 290, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 302, GroupLayout.PREFERRED_SIZE)
 					.addGap(52))
 		);
 		
@@ -158,20 +161,77 @@ public class PaginaPrincipal extends JFrame {
 				do_btnNewButton_actionPerformed(arg0);
 			}
 		});
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		
+		JButton btnBuscar_1 = new JButton("Buscar");
+		btnBuscar_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				do_btnBuscar_1_actionPerformed(arg0);
+			}
+		});
 		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
 		gl_panel_2.setHorizontalGroup(
 			gl_panel_2.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_2.createSequentialGroup()
-					.addGap(314)
-					.addComponent(btnCadastro2))
+					.addContainerGap()
+					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 343, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(btnBuscar_1)
+							.addPreferredGap(ComponentPlacement.RELATED, 179, Short.MAX_VALUE)
+							.addComponent(btnCadastro2)))
+					.addContainerGap())
 		);
 		gl_panel_2.setVerticalGroup(
 			gl_panel_2.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_2.createSequentialGroup()
-					.addGap(5)
-					.addComponent(btnCadastro2))
+					.addContainerGap()
+					.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnCadastro2)
+						.addComponent(btnBuscar_1))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 316, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(38, Short.MAX_VALUE))
 		);
+		Object[] colunas2 = {"Identificacao", "Descricao", "Aquisicao", "Custo D", "Manutencao", "Tipo"};
+		model2 = new DefaultTableModel(colunas2, 0);
+		table_1 = new JTable(model2);
+		scrollPane_1.setViewportView(table_1);
 		panel_2.setLayout(gl_panel_2);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setToolTipText("");
+		tabbedPane.addTab("Emprestimos", null, panel_3, null);
+		
+		JButton btnCadastro_1 = new JButton("Cadastro");
+		btnCadastro_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				do_btnCadastro_1_actionPerformed(arg0);
+			}
+		});
+		GroupLayout gl_panel_3 = new GroupLayout(panel_3);
+		gl_panel_3.setHorizontalGroup(
+			gl_panel_3.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, gl_panel_3.createSequentialGroup()
+					.addContainerGap(631, Short.MAX_VALUE)
+					.addComponent(btnCadastro_1)
+					.addContainerGap())
+		);
+		gl_panel_3.setVerticalGroup(
+			gl_panel_3.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_3.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(btnCadastro_1)
+					.addContainerGap(360, Short.MAX_VALUE))
+		);
+		panel_3.setLayout(gl_panel_3);
 		btnCadastro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				do_btnCadastro_actionPerformed(arg0);
@@ -206,5 +266,16 @@ public class PaginaPrincipal extends JFrame {
 			
 			model.addRow(linha);
 		}
+	}
+	protected void do_btnBuscar_1_actionPerformed(ActionEvent arg0) {
+		Object[] colunas2 = {"Identificacao", "Descricao", "Aquisicao", "Custo D", "Manutencao", "Tipo"};
+		model2 = new DefaultTableModel(colunas2, 0);
+		table.setModel(model2);
+	}
+	protected void do_btnCadastro_1_actionPerformed(ActionEvent arg0) {
+		PaginaEmprestimo p = new PaginaEmprestimo();
+		p.setVisible(true);
+		p.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+				
 	}
 }
